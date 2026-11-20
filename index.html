@@ -250,8 +250,8 @@ button,input,select{font-family:inherit}
       </div>
       <div class="field" id="fd-npm">
         <label for="in-npm">NPM</label>
-        <input id="in-npm" type="text" inputmode="numeric" maxlength="20" placeholder="Contoh: 2201234567">
-        <div class="err">NPM harus berupa angka (minimal 6 digit).</div>
+        <input id="in-npm" type="text" maxlength="25" placeholder="Contoh: 2201234567 atau 22A1234" autocapitalize="characters" spellcheck="false">
+        <div class="err">NPM hanya boleh huruf, angka, titik, strip, atau garis miring (minimal 4 karakter).</div>
       </div>
       <div class="field" id="fd-kelas">
         <label for="in-kelas">Kelas</label>
@@ -409,8 +409,8 @@ const S = { nama:"", npm:"", kelas:"", lives:CFG.LIVES, score:0, solved:0, activ
 const form = $("f-start");
 form.addEventListener("submit", e=>{
   e.preventDefault();
-  const nama = $("in-nama").value.trim(), npm = $("in-npm").value.trim(), kelas = $("in-kelas").value;
-  const okN = nama.length>=2, okP = /^\d{6,20}$/.test(npm), okK = !!kelas;
+  const nama = $("in-nama").value.trim(), npm = $("in-npm").value.trim().toUpperCase(), kelas = $("in-kelas").value;
+  const okN = nama.length>=2, okP = /^[A-Z0-9][A-Z0-9.\-\/]{3,24}$/.test(npm), okK = !!kelas;
   $("fd-nama").classList.toggle("bad",!okN);
   $("fd-npm").classList.toggle("bad",!okP);
   $("fd-kelas").classList.toggle("bad",!okK);
